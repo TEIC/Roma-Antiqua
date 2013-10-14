@@ -258,7 +258,22 @@ test -d $TEIXSLDIR/odds || \
      die "stylesheet location $TEIXSLDIR is not accessible"
 if test "x$schema" = "x"
 then
- schema=$(saxon -s:$1 -xsl:$TEIXSLDIR/odds/extract-schemaSpec-ident.xsl | head -1 )
+cat > /tmp/extract.xsl <<EOF
+<xsl:stylesheet xmlns:tei="http://www.tei-c.org/ns/1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="2.0">
+
+  <xsl:output encoding="utf8" method="text"/>
+  <xsl:template match="/">
+      <xsl:for-each select=".//tei:schemaSpec">
+         <xsl:value-of select="@ident"/>
+         <xsl:text>&#x0A;</xsl:text>
+      </xsl:for-each>
+  </xsl:template>
+
+</xsl:stylesheet>
+EOF
+ schema=$(saxon -s:$1 -xsl:/tmp/extract.xsl | head -1 )
  schema=${schema:?"Unable to ascertain ident= of <schemaSpec>"}
 fi
 echo "Results to: $RESULTS"
