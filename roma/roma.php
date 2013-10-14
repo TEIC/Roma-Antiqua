@@ -1423,6 +1423,10 @@ class roma
 	    $szError = $this->m_oRomaDom->outputPdfLatex( $szDoc );
 	    $szEnding = 'pdf';
 	    break;
+	  case 'docx':
+	    $szError = $this->m_oRomaDom->outputDocx( $szDoc );
+	    $szEnding = 'docx';
+	    break;
 	  case 'latex':
 	    $szError = $this->m_oRomaDom->outputLatex( $szDoc );
 	    $szEnding = 'tex';

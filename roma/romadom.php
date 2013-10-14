@@ -2169,6 +2169,11 @@ class romaDom extends domDocument
 	$target="TEI%3Atext%3Axml/latex%3Aapplication%3Ax-latex";
 	$this->callGarage($szLatex, $target);
       }
+    public function outputDocx( &$szDocx )
+      {
+	$target="TEI%3Atext%3Axml/docx%3Aapplication%3Avnd.openxmlformats-officedocument.wordprocessingml.document";
+	$this->callGarage($szDocx, $target);
+      }
 
     public function outputPdfLatex( &$szPdf )
       {
