@@ -2189,15 +2189,13 @@ class romaDom extends domDocument
 
 	$szCurrentDir = getcwd();
 	chdir( roma_temporaryFilesDir );
-	exec( roma_pdflatex . ' -interaction=nonstopmode ' . $szFileName . ".tex" );
+	exec( roma_pdflatex . ' -interaction=nonstopmode ' . $szFileName . ".tex", $Results );
 	$this->updateProgressBar( '70' );
-	exec( roma_pdflatex . ' -interaction=nonstopmode ' . $szFileName . ".tex" );
-	$this->updateProgressBar( '90' );
-
-	chdir( $szCurrentDir );
 
 	$this->updateProgressBar( '95' );
 	if (file_exists($szFileName . ".pdf")) {
+	  exec( roma_pdflatex . ' -interaction=nonstopmode ' . $szFileName . ".tex" );
+	  $this->updateProgressBar( '90' );
 	  $szPdf = join( '', file( $szFileName . ".pdf" ) );	
 	   unlink( $szFileName . ".tex" );
 	   unlink( $szFileName . ".aux" );
@@ -2211,10 +2209,14 @@ class romaDom extends domDocument
 	    unlink( $szFileName . ".tex" );
     	    print "<p>ERROR: run of XeLaTeX failed.</p>";
 	    print "<pre>";
-	    print file_get_contents($szFileName . ".log");
+	    if (file_exists($szFileName . ".toc")) { print file_get_contents($szFileName . ".log") };
+	    print_r $Results;
 	    print "</pre>";
+	    $szOutput="";
 	    unlink( $szFileName . ".log" );
 	  }
+	chdir( $szCurrentDir );
+
 
 	$this->updateProgressBar( '100' );
       }
