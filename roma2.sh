@@ -274,7 +274,7 @@ cat > /tmp/extract.xsl <<EOF
 
 </xsl:stylesheet>
 EOF
- schema=$(saxon -s:$1 -xsl:/tmp/extract.xsl | head -1 )
+ schema=$(xmllint --xinclude $ODD | saxon -s:- -xsl:/tmp/extract.xsl | head -1 )
  schema=${schema:?"Unable to ascertain ident= of <schemaSpec>"}
 fi
 echo "Results to: $RESULTS"
