@@ -13,7 +13,7 @@ makeODD()
     echo "1. expand and simplify ODD "
     if test "x$lang" = "x"
     then
-	 xmllint --xinclude $ODD | saxon -s:- -o:$RESULTS/$ODDBASE.compiled  \
+	 saxon -xi:on -s:$ODD -o:$RESULTS/$ODDBASE.compiled  \
 	    -xsl:$TEIXSLDIR/odds/odd2odd.xsl \
 	    $SELECTEDSCHEMA  \
 	    $LANGUAGE\
@@ -23,12 +23,12 @@ makeODD()
 	    autoGlobal=$AUTOGLOBAL $SOURCE $DEBUG  
     else
 	echo  [names translated to language $lang]
-	xmllint --xinclude $ODD | saxon -s:- -xsl:$TEIXSLDIR/odds/odd2odd.xsl \
+	saxon -xi:on -s:$ODD -xsl:$TEIXSLDIR/odds/odd2odd.xsl \
 	    autoGlobal=$AUTOGLOBAL \
 	    currentDirectory=$H \
 	    useVersionFromTEI=$useVersionFromTEI \
 	    $SOURCE $DEBUG  \
-	    | saxon -o:$RESULTS/$ODDBASE.compiled -s:- -xsl:$TEIXSLDIR/odds/translate-odd.xsl \
+	    | saxon -xi:on -o:$RESULTS/$ODDBASE.compiled -s:- -xsl:$TEIXSLDIR/odds/translate-odd.xsl \
 	    $DEBUG $LANGUAGE $DOCLANG 
    fi
 }
@@ -36,7 +36,7 @@ makeODD()
 makeRelax() 
 {
     echo "2. make RELAX NG from compiled ODD"
-    saxon   -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2relax.xsl \
+    saxon -xi:on   -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2relax.xsl \
     $PATTERN $DEBUG $LANGUAGE $DOCLANG  $SELECTEDSCHEMA \
 	     parameterize=$parameterize \
              autoGlobal=$AUTOGLOBAL \
@@ -58,7 +58,7 @@ makeXSD()
 makeDTD()
 {
     echo "5. make DTD from compiled ODD"
-    saxon -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2dtd.xsl \
+    saxon -xi:on -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2dtd.xsl \
 	$DEBUG $LANGUAGE $DOCLANG   $SELECTEDSCHEMA \
 	    parameterize=$parameterize \
 	    autoGlobal=$AUTOGLOBAL \
@@ -68,7 +68,7 @@ makeDTD()
 makeSCH()
 {
     echo "8. extract Schematron from compiled ODD"
-    saxon  -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/extract-sch.xsl \
+    saxon -xi:on  -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/extract-sch.xsl \
     $DEBUG $LANGUAGE $DOCLANG   $SELECTEDSCHEMA \
 	> $RESULTS/$schema.sch
 }
@@ -76,7 +76,7 @@ makeSCH()
 makeISOSCH()
 {
     echo "9. extract Schematron from compiled ODD"
-    saxon  -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/extract-isosch.xsl \
+    saxon -xi:on  -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/extract-isosch.xsl \
     $DEBUG $LANGUAGE $DOCLANG   $SELECTEDSCHEMA \
 	> $RESULTS/$schema.isosch
 }
@@ -84,7 +84,7 @@ makeISOSCH()
 makeHTMLDOC() 
 {
     echo "10. make HTML documentation $schema.doc.html "
-    saxon -o:$RESULTS/$schema.doc.html -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2html.xsl \
+    saxon -xi:on -o:$RESULTS/$schema.doc.html -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2html.xsl \
 	$DOCFLAGS  \
 	$DEBUG  $LANGUAGE $DOCLANG autoGlobal=$AUTOGLOBAL \
 	STDOUT=true \
@@ -94,7 +94,7 @@ makeHTMLDOC()
 makePDFDOC() 
 {
     echo "7. make PDF documentation $schema.doc.pdf and $schema.doc.tex "
-    saxon  -o:$RESULTS/$schema.doc.tex -s:$RESULTS/$schema.doc.xml -xsl:$TEIXSLDIR/latex2/tei.xsl \
+    saxon -xi:on  -o:$RESULTS/$schema.doc.tex -s:$RESULTS/$schema.doc.xml -xsl:$TEIXSLDIR/latex2/tei.xsl \
 	$DEBUG $DOCFLAGS $LANGUAGE $DOCLANG autoGlobal=$AUTOGLOBAL useHeaderFrontMatter=true reencode=false \
 	preQuote=“ postQuote=”
     cat > $RESULTS/perl$$.pl<<EOF
@@ -138,7 +138,7 @@ EOF
 makeXMLDOC() 
 {
     echo "6. make expanded documented ODD $schema.doc.xml "
-    saxon -o:$RESULTS/$schema.doc.xml  \
+    saxon -xi:on -o:$RESULTS/$schema.doc.xml  \
     -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2lite.xsl \
     $DEBUG $DOCFLAGS  $LANGUAGE $DOCLANG $SOURCE autoGlobal=$AUTOGLOBAL 
 }
@@ -247,9 +247,9 @@ RESULTS=${2:-RomaResults}
 H=`pwd`/
 D=`date "+%Y-%m-%d %H:%M:%S"`
 echo "========= Roma starts at $D ==========="
-# "Test for software: xmllint, saxon, trang, and perl"
+# "Test for software: xmllint, saxon -xi:on, trang, and perl"
 which  xmllint > /dev/null || die "you do not have xmllint"
-which  saxon > /dev/null || die "you do not have saxon installed"
+which  saxon -xi:on > /dev/null || die "you do not have saxon -xi:on installed"
 which trang > /dev/null || die "you do not have trang installed"
 which perl > /dev/null || die "you do not have perl installed"
 test -f $ODD || die "file $ODD does not exist"
@@ -274,7 +274,7 @@ cat > /tmp/extract.xsl <<EOF
 
 </xsl:stylesheet>
 EOF
- schema=$(xmllint --xinclude $ODD | saxon -s:- -xsl:/tmp/extract.xsl | head -1 )
+ schema=$(saxon -xi:on -s:$ODD -xsl:/tmp/extract.xsl | head -1 )
  schema=${schema:?"Unable to ascertain ident= of <schemaSpec>"}
 fi
 echo "Results to: $RESULTS"
