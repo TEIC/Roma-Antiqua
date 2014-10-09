@@ -13,7 +13,7 @@ makeODD()
     echo "1. expand and simplify ODD "
     if test "x$lang" = "x"
     then
-	 saxon -xi:on -s:$ODD -o:$RESULTS/$ODDBASE.compiled  \
+	 saxon -xi:on -s:$ODD -o:$RESULTS/$schema.compiled  \
 	    -xsl:$TEIXSLDIR/odds/odd2odd.xsl \
 	    $SELECTEDSCHEMA  \
 	    $LANGUAGE\
@@ -28,7 +28,7 @@ makeODD()
 	    currentDirectory=$H \
 	    useVersionFromTEI=$useVersionFromTEI \
 	    $SOURCE $DEBUG  \
-	    | saxon -xi:on -o:$RESULTS/$ODDBASE.compiled -s:- -xsl:$TEIXSLDIR/odds/translate-odd.xsl \
+	    | saxon -xi:on -o:$RESULTS/$schema.compiled -s:- -xsl:$TEIXSLDIR/odds/translate-odd.xsl \
 	    $DEBUG $LANGUAGE $DOCLANG 
    fi
 }
@@ -36,7 +36,7 @@ makeODD()
 makeRelax() 
 {
     echo "2. make RELAX NG from compiled ODD"
-    saxon -xi:on   -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2relax.xsl \
+    saxon -xi:on   -s:$RESULTS/$schema.compiled -xsl:$TEIXSLDIR/odds/odd2relax.xsl \
     $PATTERN $DEBUG $LANGUAGE $DOCLANG  $SELECTEDSCHEMA \
 	     parameterize=$parameterize \
              autoGlobal=$AUTOGLOBAL \
@@ -58,7 +58,7 @@ makeXSD()
 makeDTD()
 {
     echo "5. make DTD from compiled ODD"
-    saxon -xi:on -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2dtd.xsl \
+    saxon -xi:on -s:$RESULTS/$schema.compiled -xsl:$TEIXSLDIR/odds/odd2dtd.xsl \
 	$DEBUG $LANGUAGE $DOCLANG   $SELECTEDSCHEMA \
 	    parameterize=$parameterize \
 	    autoGlobal=$AUTOGLOBAL \
@@ -68,7 +68,7 @@ makeDTD()
 makeSCH()
 {
     echo "8. extract Schematron from compiled ODD"
-    saxon -xi:on  -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/extract-sch.xsl \
+    saxon -xi:on  -s:$RESULTS/$schema.compiled -xsl:$TEIXSLDIR/odds/extract-sch.xsl \
     $DEBUG $LANGUAGE $DOCLANG   $SELECTEDSCHEMA \
 	> $RESULTS/$schema.sch
 }
@@ -76,7 +76,7 @@ makeSCH()
 makeISOSCH()
 {
     echo "9. extract Schematron from compiled ODD"
-    saxon -xi:on  -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/extract-isosch.xsl \
+    saxon -xi:on  -s:$RESULTS/$schema.compiled -xsl:$TEIXSLDIR/odds/extract-isosch.xsl \
     $DEBUG $LANGUAGE $DOCLANG   $SELECTEDSCHEMA \
 	> $RESULTS/$schema.isosch
 }
@@ -84,7 +84,7 @@ makeISOSCH()
 makeHTMLDOC() 
 {
     echo "10. make HTML documentation $schema.doc.html "
-    saxon -xi:on -o:$RESULTS/$schema.doc.html -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2html.xsl \
+    saxon -xi:on -o:$RESULTS/$schema.doc.html -s:$RESULTS/$schema.compiled -xsl:$TEIXSLDIR/odds/odd2html.xsl \
 	$DOCFLAGS  \
 	$DEBUG  $LANGUAGE $DOCLANG autoGlobal=$AUTOGLOBAL \
 	STDOUT=true \
@@ -139,7 +139,7 @@ makeXMLDOC()
 {
     echo "6. make expanded documented ODD $schema.doc.xml "
     saxon -xi:on -o:$RESULTS/$schema.doc.xml  \
-    -s:$RESULTS/$ODDBASE.compiled -xsl:$TEIXSLDIR/odds/odd2lite.xsl \
+    -s:$RESULTS/$schema.compiled -xsl:$TEIXSLDIR/odds/odd2lite.xsl \
     $DEBUG $DOCFLAGS  $LANGUAGE $DOCLANG $SOURCE autoGlobal=$AUTOGLOBAL 
 }
 
@@ -345,7 +345,7 @@ then
     fi
 fi
 $dochtml && makeHTMLDOC
-$compile || $debug || rm  $RESULTS/$ODDBASE.compiled
+$compile || $debug || rm  $RESULTS/$schema.compiled
 test -f subset.xsl && rm subset.xsl
 test -f tei$$.xml && rm tei$$.xml
 D=`date "+%Y-%m-%d %H:%M:%S.%N"`
