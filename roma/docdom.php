@@ -99,7 +99,7 @@ class docDom extends domDocument
 	$oTEI = $this->getElementsByTagname( 'TEI' )->item(0);
 	$oBody = $this->getElementsByTagname( 'body' )->item(0);
 
-	$this->m_oRomaDom->getHeader( &$aszHeader );
+	$this->m_oRomaDom->getHeader( $aszHeader );
 #        $aszHeader = $oBody->appendChild( $aszHeader );
 
 	// get selected Modules
