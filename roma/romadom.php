@@ -2209,8 +2209,8 @@ class romaDom extends domDocument
 	    unlink( $szFileName . ".tex" );
     	    print "<p>ERROR: run of XeLaTeX failed.</p>";
 	    print "<pre>";
-	    if (file_exists($szFileName . ".toc")) { print file_get_contents($szFileName . ".log") };
-	    print_r $Results;
+	    if (file_exists($szFileName . ".toc")) { print file_get_contents($szFileName . ".log"); }
+	    print_r($Results);
 	    print "</pre>";
 	    $szOutput="";
 	    unlink( $szFileName . ".log" );
