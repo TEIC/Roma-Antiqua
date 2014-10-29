@@ -7,7 +7,7 @@ Standards-Version: 3.9.1
 
 Package: tei-roma
 Architecture: all
-Depends: tei-xsl
-Suggests: tei-p5-database,tei-p5-exemplars, php5,php5-xsl,trang-java
+Depends: tei-p5-exemplars
+Suggests: php5,php5-xsl
 Description: Roma TEI Schema Builder
  Web application to build schemas for the TEI
