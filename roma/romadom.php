@@ -883,13 +883,15 @@ class romaDom extends domDocument
     public function getCustomizationTitle( &$szTitle )
       {
 	$this->getXPath( $oXPath );
-	$szTitle = $oXPath->query( "/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title" )->item(0)->nodeValue;
+	/* MDH 2015-07-27: rather ugly hack to handle http://sourceforge.net/p/tei/bugs/724/. */
+	$szTitle = str_replace('"', '&quot;', $oXPath->query( "/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title" )->item(0)->nodeValue);
       }
 
     public function getCustomizationAuthor( &$szAuthor )
       {
 	$this->getXPath( $oXPath );
-	$szAuthor = $oXPath->query( "/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:author" )->item(0)->nodeValue;
+		/* MDH 2015-07-27: rather ugly hack to handle http://sourceforge.net/p/tei/bugs/724/. */
+	$szAuthor = str_replace('"', '&quot;', $oXPath->query( "/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:author" )->item(0)->nodeValue);
       }
 
     public function getCustomizationFilename( &$szFilename )
