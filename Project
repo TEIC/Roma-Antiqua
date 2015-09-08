@@ -1,7 +1,7 @@
 Summary
 -------
 
-The Roma tool at http://tei.oucs.ox.ac.uk/Roma/
+The Roma tool at http://www.tei-c.org/Roma/
 provides a way of constructing specifications
 from which TEI schemas and documentation 
 can be derived. The aim of this project is to
@@ -38,14 +38,13 @@ an eXist XML database, sending XQuery via HTTP.
 
 Familiarisation
 ---------------
-1. Visit http://tei.oucs.ox.ac.uk/Roma/ and http://www.tei-c.org/
+1. Visit http://www.tei-c.org/Roma/ and http://www.tei-c.org/
 and gain some understanding of what it is that Roma is trying to do.
 
 2. Install Roma locally, to give a testbed for 
 changes. If possible, install on a Debian Linux box,
 as there are Debian packages ready at
-http://tei.oucs.ox.ac.uk/teideb/. The TEI Ubuntu CD
-also has a working system.
+http://tei.oucs.ox.ac.uk/teideb/. 
 
 3. Write a report on the user interface, with suggestions
 on where it can be improved.
@@ -67,9 +66,7 @@ techniques?
 3. The person user of Roma wants a graphic view of how what they
 are building fits together. Can we give them a tree diagram
 showing where they are in the process, and what the effects are
-when they eg add modules? http://tei.oucs.ox.ac.uk/TV/ has some
-ideas in this respect, for visualizing TEI content models.
-I propose a graphical editor showing TEI modules and their
+when they eg add modules? I propose a graphical editor showing TEI modules and their
 elements, which would allow you to add and remove modules
 and their elements. 
 
@@ -78,7 +75,7 @@ are not supported in Roma, eg editing macro specifications. Can
 we add a way of editing them?
 
 Sebastian Rahtz
-sebastian.rahtz@oucs.ox.ac.uk
+sebastian.rahtz@it.ox.ac.uk
 
 
 
