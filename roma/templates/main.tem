@@ -74,9 +74,8 @@
   <input class="submit" type="submit" value="{res:roma/res/main|$[lang]|searchtei}"/>
 </form>
 -->
-<p class="author">Roma was written by Arno Mittelbach and is maintained by Sebastian Rahtz. Sanity check written by Ioan Bernevig.
-Queries should be <a href="https://github.com/TEIC/Roma/issues/new">added as issues on github</a> or best effort support may be available from <a 
-href="mailto:tei@it.ox.ac.uk">tei@it.ox.ac.uk</a>.</p>
+<p class="author">Roma was written by Arno Mittelbach and Sebastian Rahtz. Sanity check written by Ioan Bernevig. It is maintained by the TEI Consortium's Technical Council. 
+Queries should be <a href="https://github.com/TEIC/Roma/issues/new">added as issues on github</a>.</p>
 <p class="author">This is Roma version {roma_version}, last updated {roma_date}. Using TEI P5 version {Version}</p>
 </div>
 
