@@ -45,9 +45,10 @@
   {res:roma/res/main|$[lang]|save}
   </a></span>
 
-  <span class="navbar{if:view=sanitycheck}_selected{endif}"><a class="navbar"  href="?mode=roma_sanity_check">
+ <!-- <span class="navbar{if:view=sanitycheck}_selected{endif}"><a class="navbar"  href="?mode=roma_sanity_check">
   {res:roma/res/main|$[lang]|sanitycheck}
   </a></span>
+  -->
 <!--
    <span class="navbar{if:help=on}_selected{endif}"><a class="navbar" 
    href="?help=switch">
