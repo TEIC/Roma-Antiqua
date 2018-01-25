@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 
 require_once( 'roma/roma.php' );
 
@@ -31,4 +31,4 @@ switch( $_REQUEST[ 'option' ] )
 $Version = file_get_contents( roma_teiweb_server . 'VERSION');
 $_SESSION[ 'Version' ]  = $Version;
 $oRoma->run();
-</script>
+?>

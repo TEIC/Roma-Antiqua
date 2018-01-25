@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 // ######################################################################
 //
 // Path: /usr/local/php/includes/notam/notamHandler.php
@@ -162,7 +162,7 @@ class notamHandler extends domDocument
   }
 
 
-class error extends domDocument
+class notamError extends domDocument
   {
     
     private $m_oError;
@@ -273,4 +273,4 @@ class notam extends domDocument
       }
   }  
 
-</script>
+?>

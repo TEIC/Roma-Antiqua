@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 // ######################################################################
 //
 // Path: /usr/local/php/includes/parser/parser.php
@@ -188,3 +188,4 @@ class parser
 	 return $errResult;
        }
   }
+?>

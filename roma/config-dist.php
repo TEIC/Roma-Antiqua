@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 
 session_start(); 
 
@@ -35,10 +35,10 @@ define ( 'roma_teiweb_server',       'http://www.tei-c.org/release/doc/tei-p5-do
 
 define ( 'roma_customization_validator','roma/oddschema.rng');
 define ( 'roma_temporaryFilesDir',   '/tmp' );
-define ( 'roma_tei',                 '/usr/share/' );
+define ( 'roma_tei',                 '/var/www/html/' );
 define ( 'roma_localStylesheetDir',  'roma/stylesheets' );
 define ( 'roma_templateDir',         'roma/templates' );
 define ( 'roma_resource_path',       'roma/res' );
 define ('roma_version','4.15');
 define ('roma_date','2013-10-11');
-</script>
+?>

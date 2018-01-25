@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 
 
 class falseTagnameException extends Exception
@@ -91,4 +91,4 @@ class attributeExistsException extends Exception
   }
 
 
-</script>
+?>

@@ -144,6 +144,7 @@ define( 'roma_mode_generateDoc', 'generateDoc' );
 define( 'roma_mode_downloadFile', 'download' );
 define( 'roma_mode_customizeCustomization', 'customizeCustomization' );
 define( 'roma_mode_processCustomizeCustomization', 'processCustomizeCustomization' );
+define( 'roma_sanity_check', 'sanityCheck' );
 
 
 //#########################

@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 // ######################################################################
 //
 // Path: /usr/local/includes/php/roma/docdom.php
@@ -665,4 +665,4 @@ class docDom extends domDocument
 
   }
 
-</script>
+?>

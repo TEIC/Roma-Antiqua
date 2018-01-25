@@ -64,10 +64,13 @@ release-stamp:
 	mkdir -p release/tei-roma
 	V=`cat VERSION` D=`head -1 ChangeLog | awk '{print $$1}'`;export D V; \
 	echo version $$V of date $$D; \
-	perl -p -i -e "s+.*define.*roma_date.*+define (\'roma_date\',\'$$D\');+" roma/config.php; \
-	perl -p -i -e "s+.*define.*roma_version.*+define (\'roma_version\',\'$$V\');+" roma/config.php; \
+	# seems to be unnecessary/or duplicate of config-dist.php?
+	#perl -p -i -e "s+.*define.*roma_date.*+define (\'roma_date\',\'$$D\');+" roma/config.php; \
+	#perl -p -i -e "s+.*define.*roma_version.*+define (\'roma_version\',\'$$V\');+" roma/config.php; \
 	perl -p -i -e "s+.*define.*roma_date.*+define (\'roma_date\',\'$$D\');+" roma/config-dist.php; \
 	perl -p -i -e "s+.*define.*roma_version.*+define (\'roma_version\',\'$$V\');+" roma/config-dist.php; \
+	perl -p -i -e "s+{roma_date}+$$D+" index.html; \
+	perl -p -i -e "s+{roma_version}+$$V+" index.html; \
 	tar --exclude=.svn -c  -f - $(FILES) | (cd release/tei-roma; tar xf -); \
 	perl -p -i -e "s/{roma_version}/$$V/;s/{roma_date}/$$D/" release/tei-roma/roma/templates/main.tem
 	(cd roma; curl -s -F upload=@oddschema.odd  -o oddschema.rng http://tei-c.org/ege-webservice/Conversions/ODD%3Atext%3Axml/ODDC%3Atext%3Axml/relaxng%3Aapplication%3Axml-relaxng/)

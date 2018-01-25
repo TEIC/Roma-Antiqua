@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 // ######################################################################
 //
 // Path: /usr/local/php/includes/resource/resource.php
@@ -81,3 +81,4 @@ class resource
 	  }
       }
   }
+?>
