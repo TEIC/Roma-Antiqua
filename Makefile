@@ -43,7 +43,6 @@ install: release-stamp
         perl -p -i -e 's+http://www.tei-c.org/release+/usr/share+' ${PREFIX}${ETC}/tei-roma/config.php
 	(cd ${PREFIX}/${LOCATION}/share/tei-roma/roma; rm config.php; ln -s ${PREFIX}${ETC}/tei-roma/config.php config.php)
 
-
 dist:  release-stamp
 	(cd release; zip -r ../tei-roma-`cat ../VERSION`.zip tei-roma)
 
@@ -64,9 +63,6 @@ release-stamp:
 	mkdir -p release/tei-roma
 	V=`cat VERSION` D=`head -1 ChangeLog | awk '{print $$1}'`;export D V; \
 	echo version $$V of date $$D; \
-	# seems to be unnecessary/or duplicate of config-dist.php?
-	#perl -p -i -e "s+.*define.*roma_date.*+define (\'roma_date\',\'$$D\');+" roma/config.php; \
-	#perl -p -i -e "s+.*define.*roma_version.*+define (\'roma_version\',\'$$V\');+" roma/config.php; \
 	perl -p -i -e "s+.*define.*roma_date.*+define (\'roma_date\',\'$$D\');+" roma/config-dist.php; \
 	perl -p -i -e "s+.*define.*roma_version.*+define (\'roma_version\',\'$$V\');+" roma/config-dist.php; \
 	perl -p -i -e "s+{roma_date}+$$D+" index.html; \

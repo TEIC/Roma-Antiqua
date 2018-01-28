@@ -29,13 +29,8 @@ ini_set("max_execution_time", 60);
 define ( 'oxgarage_server',          'http://www.tei-c.org/ege-webservice');
 define ( 'roma_xquery_server',       'http://www.tei-c.org/Query/' );
 define ( 'roma_teiweb_server',       'http://www.tei-c.org/release/doc/tei-p5-doc/' );
-// for tei.oucs.ox.ac.uk
-//define ( 'oxgarage_server','http://oxgarage.oucs.ox.ac.uk:8080/ege-webservice');
-//define ( 'roma_xquery_server', 'http://www.tei-c.org/Query/' );
-
 define ( 'roma_customization_validator','roma/oddschema.rng');
 define ( 'roma_temporaryFilesDir',   '/tmp' );
-define ( 'roma_tei',                 '/var/www/html/' );
 define ( 'roma_localStylesheetDir',  'roma/stylesheets' );
 define ( 'roma_templateDir',         'roma/templates' );
 define ( 'roma_resource_path',       'roma/res' );
