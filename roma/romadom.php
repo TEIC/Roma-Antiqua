@@ -2112,11 +2112,14 @@ class romaDom extends domDocument
 	fwrite($handle, $this->SaveXML());
 	fclose($handle);
 	$this->updateProgressBar( '20' );
-	$file = array("upload"=>"@" . $tmpfname);
+	$cfile = new CURLFile($tmpfname,'application/xml');
+	$file = array('upload' => $cfile);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $file); 
 	$garageResult = curl_exec($ch);
 	unlink($tmpfname);
 	$this->updateProgressBar( '100' );
+	// close cURL resource, and free up system resources
+    curl_close($ch);
     }
 
     public function loadProgressBar()
