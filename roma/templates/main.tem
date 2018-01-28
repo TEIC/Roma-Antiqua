@@ -76,7 +76,7 @@
 </form>
 -->
 <p class="author">Roma was written by Arno Mittelbach and Sebastian Rahtz. Sanity check written by Ioan Bernevig. It is maintained by the TEI Consortium's Technical Council. 
-Queries should be <a href="https://github.com/TEIC/Roma/issues/new">added as issues on github</a>.</p>
+Queries should be <a href="https://github.com/TEIC/Roma/issues">added as issues on github</a>.</p>
 <p class="author">This is Roma version {roma_version}, last updated {roma_date}. Using TEI P5 version {Version}</p>
 </div>
 
