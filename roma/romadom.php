@@ -2294,7 +2294,7 @@ class romaDom extends domDocument
     public function createSchemaRNC( &$szRNC )
       {
 	$target="rnc%3Aapplication%3Arelaxng-compact/";
-	$this->callGarage($szRNG, $target);
+	$this->callGarage($szRNC, $target);
       }
 
     public function createSchemaXSD( &$szXSD, $fileName )
