@@ -7,7 +7,8 @@ ENV ROMA_XQUERY_SERVER=http://www.tei-c.org/Query/
 ENV ROMA_TEIWEB_SERVER=http://www.tei-c.org/release/doc/tei-p5-doc/
 
 RUN apt-get update \
-    && apt-get --yes --force-yes --no-install-recommends install unzip zip libxslt-dev curl libcurl3 libcurl3-dev
+    && apt-get --yes --force-yes --no-install-recommends install unzip zip libxslt-dev curl libcurl3 libcurl3-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR ${ROMA_BUILD_HOME}
 COPY . .
