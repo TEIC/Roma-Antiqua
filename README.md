@@ -35,7 +35,7 @@ If you have Docker installed, you can fetch a readymade image from [Docker Hub](
 
 ```bash
 docker run --rm \
-    -p 8080:8080 \
+    -p 8080:80 \
     -v /your/path/to/TEIcustom/schemas:/usr/share/xml/tei/custom:ro \ 
     --name roma \
     teic/roma:dev
