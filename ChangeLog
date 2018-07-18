@@ -1,3 +1,9 @@
+2018-07-18  Peter Stadler <pstadler@mail.uni-paderborn.de>
+    major overhaul:
+    * update to PHP7
+    * add Dockerfile for containerisation
+    
+
 2013-01-11  Sebastian Rahtz <sebastian.rahtz@gmail.com>
 	Changed paths:
 	   M /trunk/Roma/index.html
