@@ -1510,7 +1510,6 @@ class romaDom extends domDocument
 		    }
 		}
 	      if (!$gotDesc)
-		$oDesc->nodeValue= stripslashes($aszConfig[ 'description' ]);
 	       {
 		 $theDesc = $this->createElementNS( 'http://www.tei-c.org/ns/1.0', 'desc' );
 		 $oDesc = $oAttDef->appendChild( $theDesc );
