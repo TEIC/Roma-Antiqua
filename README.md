@@ -31,7 +31,7 @@ an eXist XML database, sending XQuery via HTTP.
 
 ### with Docker
 
-If you have Docker installed, you can fetch a readymade image from [Docker Hub](https://hub.docker.com/r/teic/roma/).
+If you have Docker installed, you can fetch a readymade image from [Docker Hub](https://hub.docker.com/r/teic/roma/). Along with this image you'll need an eXist-db sidekick as backend which you can get from  https://hub.docker.com/r/teic/xquery4roma.
 
 ```bash
 docker run --rm \
@@ -52,5 +52,28 @@ docker run --rm \
     Defaults to `http://www.tei-c.org/Query/`  
 * **ROMA_TEIWEB_SERVER** : The full URL to the TEI web server.
     Defaults to `http://www.tei-c.org/release/doc/tei-p5-doc/`.
+
+#### Docker compose
+
+The following Docker compose file should bring up the xquery4roma sidekick and the Roma web frontend, listening on your local port 9090. Simply save as `docker-compose.yml` and run `docker-compose up`.
+
+```yaml
+version: '3'
+
+services:
+    roma:
+        image: teic/roma
+        restart: always
+        volumes:
+            - /your/path/to/TEIcustom/schemas:/usr/share/xml/tei/custom:ro
+        ports:
+            - "9090:80"
+        environment:
+            OXGARAGE_SERVER: http://oxgarage.tei-c.org/ege-webservice
+            ROMA_XQUERY_SERVER: http://xquery4roma:8080/Query/
+    xquery4roma:
+        image: teic/xquery4roma
+        restart: always
+```        
 
 
