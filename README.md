@@ -55,7 +55,7 @@ docker run --rm \
 
 #### Docker compose
 
-The following Docker compose file should bring up the xquery4roma sidekick and the Roma web frontend, listening on your local port 9090. Simply save as `docker-compose.yml` and run `docker-compose up`.
+The following Docker compose file should bring up the xquery4roma sidekick and the Roma web frontend, listening on your local port 9090. Simply save as `docker-compose.yml` and run `docker-compose up -d`. To stop and remove all services again, run `docker-compose down`.
 
 ```yaml
 version: '3'
