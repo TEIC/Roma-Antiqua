@@ -1,6 +1,6 @@
 # Roma
 
-The Roma tool at http://www.tei-c.org/Roma/
+The Roma tool at http://roma.tei-c.org/
 provides a way of constructing ODD specifications
 from which TEI schemas and documentation 
 can be derived. 
