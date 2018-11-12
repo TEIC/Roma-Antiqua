@@ -842,7 +842,9 @@ class romaDom extends domDocument
 	      {
 		foreach( $oValList->childNodes as $oChild )
 		  {
-		    $aszList[] = $oChild->getAttribute( 'ident' );
+		    if ($oChild.nodeType == XML_ELEMENT_NODE){
+		      $aszList[] = $oChild->getAttribute( 'ident' );
+		    }
 		  }
 		  $aszListType = $oValList->getAttribute( 'type' );
 	      }
@@ -1510,6 +1512,7 @@ class romaDom extends domDocument
 		    }
 		}
 	      if (!$gotDesc)
+		$oDesc->nodeValue= stripslashes($aszConfig[ 'description' ]);
 	       {
 		 $theDesc = $this->createElementNS( 'http://www.tei-c.org/ns/1.0', 'desc' );
 		 $oDesc = $oAttDef->appendChild( $theDesc );
@@ -2096,7 +2099,7 @@ class romaDom extends domDocument
     protected function callGarage ( &$garageResult, $target) {
 	$OXG = oxgarage_server . '/Conversions/ODD%3Atext%3Axml/ODDC%3Atext%3Axml/';
 	$this->getDocLanguage( $szDocLanguage );
-	$properties ="?properties=" . urlencode("<conversions><conversion index='0'><property id='pl.psnc.dl.ege.tei.profileNames'>tei</property></conversion><conversion index='1'><property id='pl.psnc.dl.ege.tei.profileNames'>tei</property><property id='oxgarage.textOnly'>true</property><property id='oxgarage.lang'>" . $szDocLanguage .  "</property></conversion></conversions>");
+	$properties ="?properties=<conversions><conversion%20index='0'><property%20id='pl.psnc.dl.ege.tei.profileNames'>tei</property></conversion><conversion%20index='1'><property%20id='pl.psnc.dl.ege.tei.profileNames'>tei</property><property%20id='oxgarage.textOnly'>true</property><property%20id='oxgarage.lang'>" . $szDocLanguage .  "</property></conversion></conversions>";
 	$this->loadProgressBar();
 	$this->updateProgressBar( '10' );
 
@@ -2111,14 +2114,11 @@ class romaDom extends domDocument
 	fwrite($handle, $this->SaveXML());
 	fclose($handle);
 	$this->updateProgressBar( '20' );
-	$cfile = new CURLFile($tmpfname,'application/xml');
-	$file = array('upload' => $cfile);
+	$file = array("upload"=>"@" . $tmpfname);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $file); 
 	$garageResult = curl_exec($ch);
 	unlink($tmpfname);
 	$this->updateProgressBar( '100' );
-	// close cURL resource, and free up system resources
-    curl_close($ch);
     }
 
     public function loadProgressBar()
@@ -2292,20 +2292,85 @@ class romaDom extends domDocument
 
     public function createSchemaRNC( &$szRNC )
       {
-	$target="rnc%3Aapplication%3Arelaxng-compact/";
-	$this->callGarage($szRNC, $target);
+	$target="relaxng%3Aapplication%3Axml-relaxng/";
+	$this->callGarage($szRNG, $target);
+	$szID = md5( uniqid(rand(), true ) );
+	$this->updateProgressBar( '50' );
+	
+	$szInputFile = roma_temporaryFilesDir . '/' . $szID . '.tmp';    
+	$szOutputFile = roma_temporaryFilesDir . '/' . $szID . '.rnc';    
+	file_put_contents( $szInputFile , $szRNG);
+
+	$this->updateProgressBar( '70' );
+
+	ob_start();
+	System( roma_trang . ' -I rng -O rnc ' . $szInputFile . ' ' . $szOutputFile  . ' 2>&1');
+	$szError = ob_get_clean();
+	ob_end_clean();
+
+	$this->updateProgressBar( '90' );
+
+
+	if ( file_exists( $szOutputFile ) )
+	  {
+	    $szRNC = join( '', file( $szOutputFile ) );
+	    unlink( $szOutputFile );
+	  }
+	unlink( $szInputFile );
+
+	$this->updateProgressBar( '100' );
+
+	return $szError;
       }
 
     public function createSchemaXSD( &$szXSD, $fileName )
       {
-	$target="xsd%3Aapplication%3Axml-xsd/";
-	$this->callGarage($szXSD, $target);
+	$target="relaxng%3Aapplication%3Axml-relaxng/";
+	$this->callGarage($szRNG, $target);
+	$this->updateProgressBar( '50' );
+
+	//Save File
+	$szID = md5( uniqid(rand(), true ) );
+	
+	$szInputFile = roma_temporaryFilesDir . '/' . $szID . '.tmp';    
+	$szOutputFile = $szID . '.xsd';    
+	$szOutputFileZip = roma_temporaryFilesDir . '/' . $szID . '.zip';    
+
+	file_put_contents( $szInputFile ,$szRNG);
+	chdir (roma_temporaryFilesDir );
+
+	$this->updateProgressBar( '70' );
+	
+	ob_start();
+	System( 
+	' mkdir ' .  $szID . ';' .
+	' (cd ' .  $szID . ';' .
+	roma_trang . ' -I rng -O xsd -o disable-abstract-elements ' . 
+	$szInputFile . ' ' . $fileName  . '.xsd 2>&1;' .
+	'zip -q  ' . $szOutputFileZip . ' *  ' . ' 2>&1); rm -rf ' . $szID );
+	$szError = ob_get_clean();
+	ob_end_clean();
+
+	$this->updateProgressBar( '90' );
+
+	if ( file_exists( $szOutputFileZip ) )
+	  { 
+	    $szXSD = join( '', file( $szOutputFileZip ) );
+	    unlink( $szOutputFileZip );
+	  }
+
+	unlink( $szInputFile );
+
+	$this->updateProgressBar( '100' );
+
+	return $szError;
       }
 
     public function createSchemaDTD( &$szDTD )
       {
 	$target="dtd%3Aapplication%3Axml-dtd";
 	$this->callGarage($szDTD, $target);
+	return $szError;
       }
 
     public function getOddDom( &$oDOC )
