@@ -2,7 +2,7 @@ FROM php:7-apache
 
 ARG ROMA_BUILD_HOME=/var/roma_build
 ENV WWW_HOME=/var/www
-ENV OXGARAGE_SERVER=http://www.tei-c.org/ege-webservice
+ENV OXGARAGE_SERVER=http://oxgarage.tei-c.org/ege-webservice
 ENV ROMA_XQUERY_SERVER=http://www.tei-c.org/Query/
 ENV ROMA_TEIWEB_SERVER=http://www.tei-c.org/release/doc/tei-p5-doc/
 
