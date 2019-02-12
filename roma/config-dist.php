@@ -26,7 +26,7 @@ ini_set("max_execution_time", 60);
 
 //#########################
 // for www.tei-c.org
-define ( 'oxgarage_server',          'http://www.tei-c.org/ege-webservice');
+define ( 'oxgarage_server',          'http://oxgarage.tei-c.org/ege-webservice');
 define ( 'roma_xquery_server',       'http://www.tei-c.org/Query/' );
 define ( 'roma_teiweb_server',       'http://www.tei-c.org/release/doc/tei-p5-doc/' );
 define ( 'roma_customization_validator','roma/oddschema.rng');

@@ -2,6 +2,7 @@ PREFIX=
 LOCATION=/usr
 ETC=/etc
 TEIXSLDIR=http://www.tei-c.org/release/xml/tei/stylesheet
+OXGARAGE_SERVER=http://oxgarage.tei-c.org/ege-webservice
 
 FILES=ChangeLog \
 	g \
@@ -69,7 +70,7 @@ release-stamp:
 	perl -p -i -e "s+{roma_version}+$$V+" index.html; \
 	tar --exclude=.svn -c  -f - $(FILES) | (cd release/tei-roma; tar xf -); \
 	perl -p -i -e "s/{roma_version}/$$V/;s/{roma_date}/$$D/" release/tei-roma/roma/templates/main.tem
-	(cd roma; curl -s -F upload=@oddschema.odd  -o oddschema.rng http://tei-c.org/ege-webservice/Conversions/ODD%3Atext%3Axml/ODDC%3Atext%3Axml/relaxng%3Aapplication%3Axml-relaxng/)
+	(cd roma; curl -s -F upload=@oddschema.odd  -o oddschema.rng ${OXGARAGE_SERVER}/Conversions/ODD%3Atext%3Axml/ODDC%3Atext%3Axml/relaxng%3Aapplication%3Axml-relaxng/)
 	touch release-stamp
 
 clean:
