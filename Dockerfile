@@ -12,7 +12,7 @@ RUN apt-get update \
 
 WORKDIR ${ROMA_BUILD_HOME}
 COPY . .
-RUN make dist OXGARAGE_SERVER="https://oxgarage2.tei-c.org/ege-webservice" \
+RUN make dist OXGARAGE_SERVER=${OXGARAGE_SERVER} \
     && unzip tei-roma-*.zip -d ${WWW_HOME}/ \
     && mv ${WWW_HOME}/tei-roma/roma/config-dist.php ${WWW_HOME}/tei-roma/roma/config.php \
     && docker-php-ext-install xsl curl \
