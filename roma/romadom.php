@@ -842,7 +842,9 @@ class romaDom extends domDocument
 	      {
 		foreach( $oValList->childNodes as $oChild )
 		  {
-		    $aszList[] = $oChild->getAttribute( 'ident' );
+		    if ($oChild->nodeType == XML_ELEMENT_NODE){
+		      $aszList[] = $oChild->getAttribute( 'ident' );
+		    }
 		  }
 		  $aszListType = $oValList->getAttribute( 'type' );
 	      }
