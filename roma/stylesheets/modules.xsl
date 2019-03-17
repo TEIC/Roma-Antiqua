@@ -14,6 +14,7 @@ Description
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:param name="lang">en</xsl:param>
+  <xsl:param name="TEIWEB">http://www.tei-c.org/release/doc/tei-p5-doc/</xsl:param>
   <xsl:template match="/">
     <p class="roma">
       <table cellspacing="30">
@@ -124,7 +125,7 @@ Description
         <td>
           <a target="_new">
             <xsl:attribute name="href">
-              <xsl:text>/release/doc/tei-p5-doc/</xsl:text>
+              <xsl:value-of select="$TEIWEB"/>
               <xsl:value-of select="$language"/>
               <xsl:text>/html/</xsl:text>
               <xsl:value-of select="moduleChapter"/>

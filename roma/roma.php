@@ -661,7 +661,7 @@ class roma
 
 	$this->createChangeInListDom( $oListDom, array ( $oModules, $oChanged ) );
 
-	$this->applyStylesheet( $oListDom, 'modules.xsl', $oNewDom, array('lang' => $szDocLanguage ), 'modules' );
+	$this->applyStylesheet( $oListDom, 'modules.xsl', $oNewDom, array('lang' => $szDocLanguage, 'TEIWEB' => roma_teiweb_server), 'modules' );
 	$oParser->addReplacement( 'lang', $szLanguage );
 	$oParser->addReplacement( 'doclang', $szDocLanguage);
 	$oParser->addReplacement ('Version', $_SESSION['Version']);
