@@ -4,6 +4,17 @@ body {
 
 }
 
+.romabeta {
+  background-color: #ebd02f;
+  padding: .5em;
+  font-weight: 800;
+  font-size: 130%;
+}
+
+.romabeta a, .romabeta a:hover, .romabeta a:active, .romabeta a:visited {
+  color: #2468ab;
+}
+
 div.footer {
    padding: 5px;
    text-align: left;
