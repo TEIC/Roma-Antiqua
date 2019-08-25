@@ -1,3 +1,9 @@
+2019-08-25  Peter Stadler <pstadler@mail.uni-paderborn.de>
+    only minor changes:
+    * removed some hard coded links and values
+    * update base image to Debian Buster (for the Docker image)
+    * fix problem parsing xml comment in a closed list #29
+
 2018-07-18  Peter Stadler <pstadler@mail.uni-paderborn.de>
     major overhaul:
     * update to PHP7
