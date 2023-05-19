@@ -1,6 +1,6 @@
 # Roma
 
-The Roma tool at http://roma.tei-c.org/
+The Roma tool at https://romaantiqua.tei-c.org
 provides a way of constructing ODD specifications
 from which TEI schemas and documentation 
 can be derived. 
@@ -46,7 +46,7 @@ docker run --rm \
 * **OXGARAGE_SERVER** : The full URL of the 
     RESTful OxGarage *web service* which is used as the Roma backend 
     for creating schemas and documentation. 
-    Defaults to `http://www.tei-c.org/ege-webservice`
+    Defaults to `https://oxgarage.tei-c.org/ege-webservice`
 * **ROMA_XQUERY_SERVER** : The full URL of the eXist database backend 
     which provides the XQueries.
     Defaults to `http://www.tei-c.org/Query/`  
@@ -69,7 +69,7 @@ services:
         ports:
             - "9090:80"
         environment:
-            OXGARAGE_SERVER: http://oxgarage.tei-c.org/ege-webservice
+            OXGARAGE_SERVER: https://oxgarage.tei-c.org/ege-webservice
             ROMA_XQUERY_SERVER: http://xquery4roma:8080/Query/
     xquery4roma:
         image: teic/xquery4roma
